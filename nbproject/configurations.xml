@@ -4,6 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>GtkBoursoramaApp.h</itemPath>
+      <itemPath>GtkBoursoramaAppWindow.h</itemPath>
       <itemPath>download.h</itemPath>
       <itemPath>parser.h</itemPath>
     </logicalFolder>
@@ -14,6 +16,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>GtkBoursoramaApp.c</itemPath>
+      <itemPath>GtkBoursoramaAppWindow.c</itemPath>
       <itemPath>download.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>parser.c</itemPath>
@@ -46,6 +50,14 @@
           <commandLine>-lcurl</commandLine>
         </linkerTool>
       </compileType>
+      <item path="GtkBoursoramaApp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaApp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaAppWindow.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaAppWindow.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="download.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="download.h" ex="false" tool="3" flavor2="0">
@@ -66,7 +78,7 @@
       <compileType>
         <cTool>
           <developmentMode>5</developmentMode>
-          <commandLine>`pkg-config --cflags --libs glib-2.0`</commandLine>
+          <commandLine>`pkg-config --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
@@ -81,6 +93,14 @@
           <commandLine>-lcurl</commandLine>
         </linkerTool>
       </compileType>
+      <item path="GtkBoursoramaApp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaApp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaAppWindow.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaAppWindow.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="download.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="download.h" ex="false" tool="3" flavor2="0">

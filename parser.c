@@ -83,4 +83,5 @@ void parse_ordres_boursorama(char* html){
     
     char* quantite_ordre = strndup(html+start,stop-start);
     printf("quantite ordres %d\n",atoi(quantite_ordre));
+    free(quantite_ordre);
 }

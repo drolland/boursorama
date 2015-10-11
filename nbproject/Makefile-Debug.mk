@@ -35,6 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/GtkBoursoramaApp.o \
+	${OBJECTDIR}/GtkBoursoramaAppWindow.o \
 	${OBJECTDIR}/download.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/parser.o
@@ -58,11 +60,21 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/bourseindice
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/bourseindice: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/bourseindice ${OBJECTFILES} ${LDLIBSOPTIONS} -lcurl
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama ${OBJECTFILES} ${LDLIBSOPTIONS} -lcurl
+
+${OBJECTDIR}/GtkBoursoramaApp.o: GtkBoursoramaApp.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkBoursoramaApp.o GtkBoursoramaApp.c
+
+${OBJECTDIR}/GtkBoursoramaAppWindow.o: GtkBoursoramaAppWindow.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkBoursoramaAppWindow.o GtkBoursoramaAppWindow.c
 
 ${OBJECTDIR}/download.o: download.c 
 	${MKDIR} -p ${OBJECTDIR}
@@ -85,7 +97,7 @@ ${OBJECTDIR}/parser.o: parser.c
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/bourseindice
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama
 
 # Subprojects
 .clean-subprojects:
