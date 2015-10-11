@@ -9,6 +9,9 @@
 
 int main(int argc,char** argv)
 {
+    
+    
+    
     curl_global_init( CURL_GLOBAL_ALL );
 
     GSList* url_list = NULL;
@@ -26,7 +29,7 @@ int main(int argc,char** argv)
     
     printf("LibCurl rules!\n");
 
-    return g_application_run (G_APPLICATION (gtk_boursorama_app_new ()), argc, argv);
+    g_application_run (G_APPLICATION (gtk_boursorama_app_new ()), argc, argv);
     
     return 0;
 }

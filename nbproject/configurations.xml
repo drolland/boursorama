@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>GtkBoursoramaApp.h</itemPath>
       <itemPath>GtkBoursoramaAppWindow.h</itemPath>
+      <itemPath>GtkColoredCellRenderer.h</itemPath>
       <itemPath>download.h</itemPath>
       <itemPath>parser.h</itemPath>
     </logicalFolder>
@@ -18,6 +19,7 @@
                    projectFiles="true">
       <itemPath>GtkBoursoramaApp.c</itemPath>
       <itemPath>GtkBoursoramaAppWindow.c</itemPath>
+      <itemPath>GtkColoredCellRenderer.c</itemPath>
       <itemPath>download.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>parser.c</itemPath>
@@ -57,6 +59,10 @@
       <item path="GtkBoursoramaAppWindow.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="GtkBoursoramaAppWindow.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GtkColoredCellRenderer.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkColoredCellRenderer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="download.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -100,6 +106,10 @@
       <item path="GtkBoursoramaAppWindow.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="GtkBoursoramaAppWindow.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GtkColoredCellRenderer.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkColoredCellRenderer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="download.c" ex="false" tool="0" flavor2="0">
       </item>
