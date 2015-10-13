@@ -39,11 +39,15 @@ int http_get(ResponseBuffer** response, char* url) {
     curl_easy_cleanup(myHandle);
 }
 
+GMutex count_mutex;
+
 void http_get_task (gpointer data,gpointer user_data){
     CURL* curl_handle=(CURL*)data;
     CURLcode code = curl_easy_perform(curl_handle);
     int* count = (int*)user_data;
+    g_mutex_lock(&count_mutex);
     *count += 1;
+    g_mutex_unlock(&count_mutex);
 }
 
 int http_parallel_get(GSList** response_list, GSList* url_list) {
@@ -56,6 +60,8 @@ int http_parallel_get(GSList** response_list, GSList* url_list) {
     CURL** curl_handle = malloc(sizeof (CURL*) * nb_urls);
    
     int nb_task_completed = 0;
+    g_mutex_init(&count_mutex);
+    
     GError* error = NULL;
     GThreadPool* thread_pool = g_thread_pool_new(&http_get_task,&nb_task_completed,10,TRUE,&error);
     
@@ -71,7 +77,7 @@ int http_parallel_get(GSList** response_list, GSList* url_list) {
     }
 
     while(nb_task_completed < nb_urls)
-        usleep(100 * 1000); // 100 ms
+        g_usleep(200 * 1000); // 100 ms
                 
     for (int i = 0; i < nb_urls; i++)
         curl_easy_cleanup(curl_handle[i]);

@@ -7,12 +7,14 @@
       <itemPath>GtkBoursoramaApp.h</itemPath>
       <itemPath>GtkBoursoramaAppWindow.h</itemPath>
       <itemPath>GtkColoredCellRenderer.h</itemPath>
+      <itemPath>action.h</itemPath>
       <itemPath>download.h</itemPath>
       <itemPath>parser.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>boursorama.conf</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -20,6 +22,7 @@
       <itemPath>GtkBoursoramaApp.c</itemPath>
       <itemPath>GtkBoursoramaAppWindow.c</itemPath>
       <itemPath>GtkColoredCellRenderer.c</itemPath>
+      <itemPath>action.c</itemPath>
       <itemPath>download.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>parser.c</itemPath>
@@ -46,7 +49,7 @@
       </toolsSet>
       <compileType>
         <cTool>
-          <commandLine>`pkg-config --cflags --libs glib-2.0`</commandLine>
+          <commandLine>`pkg-config --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
         </cTool>
         <linkerTool>
           <commandLine>-lcurl</commandLine>
@@ -63,6 +66,12 @@
       <item path="GtkColoredCellRenderer.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="GtkColoredCellRenderer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="action.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="action.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boursorama.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="download.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -110,6 +119,12 @@
       <item path="GtkColoredCellRenderer.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="GtkColoredCellRenderer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="action.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="action.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boursorama.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="download.c" ex="false" tool="0" flavor2="0">
       </item>

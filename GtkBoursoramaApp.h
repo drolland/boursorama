@@ -5,3 +5,4 @@
 G_DECLARE_FINAL_TYPE (GtkBoursoramaApp, gtk_boursorama_app, GTK_BOURSORAMA, APP, GtkApplicationWindow)
         
 GtkBoursoramaApp * gtk_boursorama_app_new (void);
+

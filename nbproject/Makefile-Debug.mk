@@ -38,13 +38,14 @@ OBJECTFILES= \
 	${OBJECTDIR}/GtkBoursoramaApp.o \
 	${OBJECTDIR}/GtkBoursoramaAppWindow.o \
 	${OBJECTDIR}/GtkColoredCellRenderer.o \
+	${OBJECTDIR}/action.o \
 	${OBJECTDIR}/download.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/parser.o
 
 
 # C Compiler Flags
-CFLAGS=`pkg-config --cflags --libs glib-2.0` 
+CFLAGS=`pkg-config --cflags --libs glib-2.0 gtk+-3.0`  
 
 # CC Compiler Flags
 CCFLAGS=
@@ -81,6 +82,11 @@ ${OBJECTDIR}/GtkColoredCellRenderer.o: GtkColoredCellRenderer.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkColoredCellRenderer.o GtkColoredCellRenderer.c
+
+${OBJECTDIR}/action.o: action.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/action.o action.c
 
 ${OBJECTDIR}/download.o: download.c 
 	${MKDIR} -p ${OBJECTDIR}

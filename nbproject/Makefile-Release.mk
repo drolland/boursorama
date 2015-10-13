@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/GtkBoursoramaApp.o \
 	${OBJECTDIR}/GtkBoursoramaAppWindow.o \
 	${OBJECTDIR}/GtkColoredCellRenderer.o \
+	${OBJECTDIR}/action.o \
 	${OBJECTDIR}/download.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/parser.o
@@ -81,6 +82,11 @@ ${OBJECTDIR}/GtkColoredCellRenderer.o: GtkColoredCellRenderer.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkColoredCellRenderer.o GtkColoredCellRenderer.c
+
+${OBJECTDIR}/action.o: action.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/action.o action.c
 
 ${OBJECTDIR}/download.o: download.c 
 	${MKDIR} -p ${OBJECTDIR}

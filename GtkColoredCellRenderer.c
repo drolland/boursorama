@@ -19,16 +19,18 @@ static void gtk_colored_cell_renderer_init(GtkColoredCellRenderer *app) {
 }
 
 void custom_render (GtkCellRenderer *cell,cairo_t *cr,GtkWidget *widget,const GdkRectangle *background_area,const GdkRectangle *cell_area,GtkCellRendererState flags){
-    printf("Custom !!\n");
-    
     
     gchar* value;
     g_object_get(G_OBJECT(cell),"text",&value,NULL);
     float float_value = atof(value);
-    printf("value %f",float_value);
     g_free(value);
+
+    char format_string[100];
+    sprintf(format_string,"%10.2f",float_value);
+    g_object_set(G_OBJECT(cell),"text",format_string,NULL);
+
     
-    if ( float_value > 2.0)
+    if ( float_value >= 0.0)
         g_object_set(G_OBJECT(cell),"foreground","green",NULL);
     else
         g_object_set(G_OBJECT(cell),"foreground","red",NULL);
@@ -49,8 +51,5 @@ static void gtk_colored_cell_renderer_class_init(GtkColoredCellRendererClass *cl
 
 GtkColoredCellRenderer * gtk_colored_cell_renderer_new (void)
 {
-  return g_object_new (GTK_COLORED_CELL_RENDERER_TYPE,
-                       "application-id", "org.gtk.exampleapp",
-                       "flags", G_APPLICATION_HANDLES_OPEN,
-                       NULL);
+  return g_object_new (GTK_COLORED_CELL_RENDERER_TYPE,NULL);
 }
