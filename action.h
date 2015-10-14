@@ -21,6 +21,8 @@ void action_free(Action* act);
 
 void action_list_free(GSList* actions_list);
 
+void action_print(Action* action);
+
 GSList* action_list_copy(GSList* action_list);
 
 Action* action_list_get_by_name_and_remove(GSList** action_list,char* name);

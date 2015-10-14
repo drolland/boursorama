@@ -165,6 +165,7 @@ gboolean gtk_boursorama_app_update_gui(gpointer data){
                 ACTION_NAME, action->name,
                 ACTION_COURS,action->cours,
                 ACTION_VARIATION,action->variation,
+                ACTION_STARDUX,action->stardux,
                     -1);
         
         iter_is_valid = gtk_tree_model_iter_next(GTK_TREE_MODEL(app->list_store_action_list),&iter);
@@ -184,6 +185,7 @@ gboolean gtk_boursorama_app_update_gui(gpointer data){
                 ACTION_NAME, ((Action*)action_list_iter->data)->name,
                 ACTION_COURS,((Action*)action_list_iter->data)->cours,
                 ACTION_VARIATION,((Action*)action_list_iter->data)->variation,
+                ACTION_STARDUX,((Action*)action_list_iter->data)->stardux,
                     -1);
         
         printf("Creating new row for %s\n",((Action*)action_list_iter->data)->name);

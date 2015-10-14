@@ -32,6 +32,21 @@ double string_to_double(char* str){
     return atof(str);
 }
 
+char* lesechos_strip_ordre_quantite_string(char* str){
+    char* buff = malloc(sizeof(char) * strlen(str) );
+    char* ret = buff;
+    char* iter = str;
+    while(*iter != '\0'){
+        if ( *iter != ' ' && *iter !='\t' && *iter != '\n' && *iter != '\r' && *iter != -96){
+            *ret = *iter;
+            ret++;
+        }
+        iter++;
+    }
+    ret = '\0';
+    return buff;
+}
+
 gboolean parse_boursorama_action(Action* action, char* html) {
 
     assert(action != NULL);
@@ -76,6 +91,7 @@ gboolean parse_boursorama_action(Action* action, char* html) {
     free(variation_str);
 
 
+    
     /*
         advance_after(&offset,">Achat",html);
         advance_after(&offset,"<td",html);
@@ -132,6 +148,82 @@ gboolean parse_lesechos_action(Action *action ,char* html){
     action->variation = string_to_double(variation_str);
     //printf("variation %lf %\n",action->variation);
     free(variation_str);
+    
+     offset = 0;
+    for(int i = 0; i < 5; i++){
+   
+        if ( advance_after(&offset,"<tr data-item=\"ordreachat\"",html) == FALSE ) return FALSE;
+        
+        if ( advance_after(&offset,"<td data-field=\"quantity\"",html) == FALSE ) return FALSE;
+        if ( advance_after(&offset,">",html) == FALSE ) return FALSE;
+        start = offset;
+        if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
+        stop = offset-1;
+        char* buff = strndup(html + start, stop - start);
+        char* striped = lesechos_strip_ordre_quantite_string(buff);
+/*
+        printf("striped:%s\n",striped);
+        int j = 0;
+        while( striped[j] != '\0'){
+            printf("striped[%d] = %d\n",j,striped[j]);
+            j++;
+        }
+*/
+        action->achat.quantite[i] = string_to_double(striped);
+        free(striped);
+        free(buff);
+        if ( advance_after(&offset,"<td data-field=\"price\"",html) == FALSE ) return FALSE;
+        if ( advance_after(&offset,">",html) == FALSE ) return FALSE;
+        start = offset;
+        if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
+        stop = offset-1;
+        buff = strndup(html + start, stop - start);
+        action->achat.prix[i] = string_to_double(buff);
+        free(buff);
+    }
+     
+     for(int i = 0; i < 5; i++){
+   
+        if ( advance_after(&offset,"<tr data-item=\"ordrevente\"",html) == FALSE ) return FALSE;
+        
+        if ( advance_after(&offset,"<td data-field=\"price\"",html) == FALSE ) return FALSE;
+        if ( advance_after(&offset,">",html) == FALSE ) return FALSE;
+        start = offset;
+        if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
+        stop = offset-1;
+        char* buff = strndup(html + start, stop - start);
+        action->vente.prix[i] = string_to_double(buff);
+        free(buff);
+        
+        if ( advance_after(&offset,"<td data-field=\"quantity\"",html) == FALSE ) return FALSE;
+        if ( advance_after(&offset,">",html) == FALSE ) return FALSE;
+        start = offset;
+        if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
+        stop = offset-1;
+        buff = strndup(html + start, stop - start);
+        char* striped = lesechos_strip_ordre_quantite_string(buff);
+/*
+        printf("striped:%s\n",striped);
+        int j = 0;
+        while( striped[j] != '\0'){
+            printf("striped[%d] = %d\n",j,striped[j]);
+            j++;
+        }
+*/
+        action->vente.quantite[i] = string_to_double(striped);
+        free(striped);
+        free(buff);
+        
+    }
+     
+     /* Compute stardux */
+     double stardux = 0;
+     for(int i = 0;i < 5;i++){
+         stardux += action->achat.quantite[i] * action->achat.prix[i] - action->vente.quantite[i] * action->vente.prix[i];
+    }
+    
+    action->stardux = stardux;
+    action_print(action);
     
     return TRUE;
 }
