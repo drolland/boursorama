@@ -48,6 +48,8 @@ gint action_name_cmp(gconstpointer a,gconstpointer b){
 Action* action_list_get_by_name_and_remove(GSList** action_list,char* name){
     
     GSList* result = g_slist_find_custom(*action_list,name,action_name_cmp);
+    if ( result == NULL)
+        return NULL;
     Action* action = result->data;
     
     GSList* new_action_list = g_slist_delete_link (*action_list,result);

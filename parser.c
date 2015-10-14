@@ -7,9 +7,10 @@
 #include <assert.h>
 #include <glib-2.0/glib/gerror.h>
 
-void advance_after(int* offset, char* string, char* html) {
+gboolean advance_after(int* offset, char* string, char* html) {
     char* ptr = string;
     while (1) {
+        if ( html[*offset] == '\0' ) return FALSE;
         if (html[*offset] == *ptr) {
             ptr++;
             if (*ptr == '\0') {
@@ -21,7 +22,9 @@ void advance_after(int* offset, char* string, char* html) {
         }
         (*offset)++;
     }
+    return TRUE;
 }
+
 
 double string_to_double(char* str){
     for(int i = 0; i< strlen(str);i++)
@@ -29,7 +32,7 @@ double string_to_double(char* str){
     return atof(str);
 }
 
-void parse_boursorama_action(Action* action, char* html) {
+gboolean parse_boursorama_action(Action* action, char* html) {
 
     assert(action != NULL);
 
@@ -92,14 +95,75 @@ void parse_boursorama_action(Action* action, char* html) {
      */
 }
 
+gboolean parse_lesechos_action(Action *action ,char* html){
+    
+    assert(action != NULL);
+
+    if (action->name != NULL) free(action->name);
+
+    int offset = 0;
+
+    if ( advance_after(&offset, "<title>Cours action ", html) == FALSE ) return FALSE;
+    int start = offset;
+    if ( advance_after(&offset, " ", html) == FALSE ) return FALSE;
+    int stop = offset - 1;
+
+    action->name = strndup(html + start, stop - start);
+
+    //printf("Action name : %s - ", action->name);
+    
+    if ( advance_after(&offset,"<td class=\"b12-tab-int b12-tab-bold\">Cours</td>",html) == FALSE ) return FALSE;
+    if ( advance_after(&offset,">",html) == FALSE ) return FALSE;
+    start = offset;
+    if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
+    stop = offset - 1;
+    
+    char* cours_str = strndup(html + start, stop - start);
+    action->cours = string_to_double(cours_str);
+    free(cours_str);
+    
+    advance_after(&offset,"<td class=\"b12-tab-int b12-tab-bold\">Variation %</td>",html);
+    if ( advance_after(&offset,">",html) == FALSE ) return FALSE;
+    start = offset;
+    if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
+    stop = offset-1;
+    
+    char* variation_str = strndup(html + start, stop - start);
+    action->variation = string_to_double(variation_str);
+    //printf("variation %lf %\n",action->variation);
+    free(variation_str);
+    
+    return TRUE;
+}
+
 GSList* parse_boursorama_action_multi(GSList* response_list){
     
     GSList* current = response_list;
     GSList* action_list = NULL; 
     while ( current != NULL ){
         Action* act = action_new();
-        parse_boursorama_action(act,((ResponseBuffer*)current->data)->buffer);
-        action_list = g_slist_append(action_list,act);       
+        gboolean success = parse_boursorama_action(act,((ResponseBuffer*)current->data)->buffer);
+        if ( success == TRUE)
+        action_list = g_slist_append(action_list,act); 
+        else
+            action_free(act);
+        current = current->next;
+    } 
+    
+    return action_list;
+}
+
+GSList* parse_lesechos_action_multi(GSList* response_list){
+    
+    GSList* current = response_list;
+    GSList* action_list = NULL; 
+    while ( current != NULL ){
+        Action* act = action_new();
+        gboolean success = parse_lesechos_action(act,((ResponseBuffer*)current->data)->buffer);
+        if ( success == TRUE)
+        action_list = g_slist_append(action_list,act); 
+        else
+            action_free(act);
         current = current->next;
     } 
     
@@ -136,6 +200,7 @@ GSList* parse_boursorame_conf(char* file) {
 
     return url_list;
 }
+
 
 
 

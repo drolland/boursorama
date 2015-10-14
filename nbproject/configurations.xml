@@ -15,6 +15,7 @@
                    displayName="Resource Files"
                    projectFiles="true">
       <itemPath>boursorama.conf</itemPath>
+      <itemPath>lesechos.conf</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -77,6 +78,8 @@
       </item>
       <item path="download.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="lesechos.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="parser.c" ex="false" tool="0" flavor2="0">
@@ -129,6 +132,8 @@
       <item path="download.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="download.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lesechos.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>

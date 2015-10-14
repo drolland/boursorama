@@ -13,6 +13,7 @@ struct _GtkBoursoramaApp
   GSList* action_list;
   GMutex mutex_action_list;
   GtkListStore* list_store_action_list;
+  gint64 last_update_time;
 };
 
 
@@ -24,7 +25,7 @@ struct _GtkBoursoramaAppClass
 G_DEFINE_TYPE(GtkBoursoramaApp, gtk_boursorama_app, GTK_TYPE_APPLICATION);
 
 gboolean gtk_boursorama_app_update_gui(gpointer data);
-
+gboolean gtk_boursorama_app_label_update(gpointer data);
 
 gpointer app_logic_thread_func(gpointer data){
     
@@ -36,13 +37,13 @@ gpointer app_logic_thread_func(gpointer data){
     GSList* url_list = NULL;
     GSList* response_list = NULL;
     
-    url_list = parse_boursorame_conf("boursorama.conf");  
+    url_list = parse_boursorame_conf("lesechos.conf");  
     http_parallel_get(&response_list,url_list);
     
     g_mutex_lock(&(app->mutex_action_list));
     action_list_free(app->action_list);
     app->action_list = NULL;
-    app->action_list = parse_boursorama_action_multi(response_list);
+    app->action_list = parse_lesechos_action_multi(response_list);
     g_mutex_unlock(&(app->mutex_action_list));
         
     g_slist_free_full(url_list,g_free);
@@ -63,7 +64,7 @@ gtk_boursorama_app_init (GtkBoursoramaApp *app)
 {
     g_mutex_init(&(app->mutex_action_list));
     app->action_list = NULL;
-    app->list_store_action_list = gtk_list_store_new (N_COLUMNS,G_TYPE_STRING,G_TYPE_DOUBLE,G_TYPE_DOUBLE);
+    app->list_store_action_list = gtk_list_store_new (N_COLUMNS,G_TYPE_STRING,G_TYPE_DOUBLE,G_TYPE_DOUBLE,G_TYPE_DOUBLE);
    
     
 }
@@ -76,9 +77,12 @@ gtk_boursorama_app_activate (GApplication *application)
   app->win->tree_model_sort = gtk_tree_model_sort_new_with_model(GTK_TREE_MODEL(app->list_store_action_list));
   gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(app->win->tree_model_sort),ACTION_NAME,GTK_SORT_ASCENDING);
   gtk_tree_view_set_model(app->win->tree,GTK_TREE_MODEL(app->win->tree_model_sort));
+  g_object_unref(app->win->tree_model_sort);
   gtk_window_present (GTK_WINDOW (app->win));
   
   g_thread_new("http thread",app_logic_thread_func,app);
+  app->last_update_time = g_get_real_time();
+  g_timeout_add(300,gtk_boursorama_app_label_update,app);
   
 }
 
@@ -121,12 +125,18 @@ gtk_boursorama_app_new (void)
 }
 
 
+
 gboolean gtk_boursorama_app_update_gui(gpointer data){
+    
+    static int first_gui_update = TRUE;
     
     GtkBoursoramaApp* app = data;
     
     g_mutex_lock(&(app->mutex_action_list));
-    if ( app->action_list == NULL) return FALSE;
+    if ( app->action_list == NULL) {
+        g_mutex_unlock(&(app->mutex_action_list));
+        return FALSE;
+    }
     GSList* action_list = action_list_copy(app->action_list);
     printf("Action list length = %d\n",g_slist_length(action_list));
     g_mutex_unlock(&(app->mutex_action_list));
@@ -137,14 +147,6 @@ gboolean gtk_boursorama_app_update_gui(gpointer data){
     
     char* row_name;
     
-/*
-    GtkTreeModel* model = gtk_tree_view_get_model(GTK_TREE_VIEW(app->win->tree));
-    
-    g_object_ref(model);
-    
-    gtk_tree_view_set_model(app->win->tree,NULL);
-*/
-
     int count = 0;
     
     GtkTreeIter   iter;
@@ -156,9 +158,9 @@ gboolean gtk_boursorama_app_update_gui(gpointer data){
         
         Action* action = action_list_get_by_name_and_remove(&action_list,row_name);
         
-        printf("Found iter for %s\n",action->name);
+        //printf("Found iter for %s\n",action->name);
 
-        
+        if ( action != NULL)
         gtk_list_store_set (app->list_store_action_list, &iter,
                 ACTION_NAME, action->name,
                 ACTION_COURS,action->cours,
@@ -174,6 +176,7 @@ gboolean gtk_boursorama_app_update_gui(gpointer data){
     
     GSList* action_list_iter = action_list;
     
+    if ( first_gui_update == TRUE)
     while ( action_list_iter != NULL){
         
         gtk_list_store_append(app->list_store_action_list, &iter);
@@ -186,15 +189,23 @@ gboolean gtk_boursorama_app_update_gui(gpointer data){
         printf("Creating new row for %s\n",((Action*)action_list_iter->data)->name);
         action_list_iter = g_slist_next(action_list_iter);
     }
+    first_gui_update = FALSE;
     
-    
-/*
-    gtk_tree_view_set_model(app->win->tree,model);
-    
-    g_object_unref(model);
-*/
+    app->last_update_time = g_get_real_time();
     
     action_list_free(action_list);
     printf("GUI updated\n");
     return FALSE;
+}
+
+gboolean gtk_boursorama_app_label_update(gpointer data){
+    GtkBoursoramaApp* app = data;
+    
+    gint64 now = g_get_real_time();
+    float ellapsed = (now - app->last_update_time) / 1000000.0f;
+    char format_string[1024];
+    sprintf(format_string,"Derniere mise a jour il y a : %.2f s",ellapsed);
+    gtk_label_set_text(GTK_LABEL(app->win->update_label),format_string);
+    return TRUE;
+    
 }

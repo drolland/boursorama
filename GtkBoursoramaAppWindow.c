@@ -49,9 +49,9 @@ static void gtk_boursorama_app_window_init(GtkBoursoramaAppWindow *app){
        
    
    GtkTreeViewColumn *column;
-   GtkColoredCellRenderer *colored_renderer;
    GtkCellRenderer *renderer;
-
+   GtkWidget *h_box;
+   
    /* Create a model.  We are using the store model for now, though we
     * could use any other GtkTreeModel */
    
@@ -64,7 +64,6 @@ static void gtk_boursorama_app_window_init(GtkBoursoramaAppWindow *app){
    
    renderer = gtk_cell_renderer_text_new ();
    column = gtk_tree_view_column_new_with_attributes ("Nom Action",renderer,"text", ACTION_NAME,NULL);
-   
    gtk_tree_view_append_column (GTK_TREE_VIEW (app->tree), column);
    gtk_tree_view_column_set_sort_column_id(column,ACTION_NAME);
    
@@ -84,19 +83,45 @@ static void gtk_boursorama_app_window_init(GtkBoursoramaAppWindow *app){
    gtk_tree_selection_set_select_function(tree_selection,no_row_selection_func,NULL,NULL);
    gtk_tree_view_set_activate_on_single_click (GTK_TREE_VIEW (app->tree),FALSE);
    
-   gtk_container_add(GTK_CONTAINER(app),GTK_WIDGET(app->tree));  
-   gtk_widget_set_visible(GTK_WIDGET(app->tree),TRUE);
+   app->update_label = gtk_label_new("Derniere mise à jour il y a : ");
    
+   
+   h_box = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+   gtk_container_add(GTK_CONTAINER(app),GTK_WIDGET(h_box));  
+   
+   gtk_box_pack_start(GTK_BOX(h_box),GTK_WIDGET(app->tree),TRUE,TRUE,0);
+   gtk_box_pack_start(GTK_BOX(h_box),GTK_WIDGET(app->update_label),FALSE,FALSE,0);
+   
+   gtk_widget_set_visible(GTK_WIDGET(h_box),TRUE);
+   gtk_widget_set_visible(GTK_WIDGET(app->tree),TRUE);
+   gtk_widget_set_visible(GTK_WIDGET(app->update_label),TRUE);
+   
+    
 
    
  
+}
+
+void gtk_boursorama_app_window_finalize(GObject* object){
+    GtkBoursoramaAppWindow* app_window = (GtkBoursoramaAppWindow*) object;
+    GObject* o = (GObject*)app_window->tree;
+    printf("Tree ref count %d",o->ref_count);
+    o = (GObject*)app_window->update_label;
+    printf("Label ref count %d",o->ref_count);
+    //gtk_widget_destroy(app_window->);
+    
+    
 }
 
 
 static void
 gtk_boursorama_app_window_class_init (GtkBoursoramaAppWindowClass *class)
 {
+    GObjectClass* object_class = (GObjectClass*) class;
+    object_class->finalize = gtk_boursorama_app_window_finalize;
 }
+
+
 
 
 

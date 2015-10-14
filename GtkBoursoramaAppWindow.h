@@ -6,6 +6,7 @@ struct _GtkBoursoramaAppWindow
   GtkApplicationWindow parent;
   GtkTreeView* tree;
   GtkTreeModel* tree_model_sort;
+  GtkWidget* update_label;
 };
 
 
@@ -27,6 +28,7 @@ enum
    ACTION_NAME,
    ACTION_COURS,
    ACTION_VARIATION,
+   ACTION_STARDUX,
    N_COLUMNS
 };
 

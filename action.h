@@ -1,10 +1,18 @@
 #pragma once
 #include <glib-2.0/glib.h>
 
+typedef struct _carnet_ordre {
+    int quantite[5];
+    double prix[5];
+} CarnetOrdre;
+
 typedef struct _action {
     char* name;
     double cours;    
     double variation;
+    CarnetOrdre achat;
+    CarnetOrdre vente;
+    double stardux;
 } Action ;
 
 Action* action_new();
