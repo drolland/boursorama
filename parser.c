@@ -62,7 +62,7 @@ gboolean parse_boursorama_action(Action* action, char* html) {
     advance_after(&offset, "\"", html);
     int stop = offset - 1;
 
-    action->name = strndup(html + start, stop - start);
+    action->name = g_strndup(html + start, stop - start);
 
     //printf("Action name : %s - ", action->name);
     
@@ -72,7 +72,7 @@ gboolean parse_boursorama_action(Action* action, char* html) {
     advance_after(&offset, " ", html);
     stop = offset - 1;
     
-    char* cours_str = strndup(html + start, stop - start);
+    char* cours_str = g_strndup(html + start, stop - start);
     action->cours = string_to_double(cours_str);
     //printf("cours euronext %s EUR - ",cours_str);
     //printf("cours euronext %f EUR - ",action->cours);
@@ -85,7 +85,7 @@ gboolean parse_boursorama_action(Action* action, char* html) {
     advance_after(&offset,"%",html);
     stop = offset-1;
     
-    char* variation_str = strndup(html + start, stop - start);
+    char* variation_str = g_strndup(html + start, stop - start);
     action->variation = string_to_double(variation_str);
     //printf("variation %lf %\n",action->variation);
     free(variation_str);
@@ -124,7 +124,7 @@ gboolean parse_lesechos_action(Action *action ,char* html){
     if ( advance_after(&offset, " ", html) == FALSE ) return FALSE;
     int stop = offset - 1;
 
-    action->name = strndup(html + start, stop - start);
+    action->name = g_strndup(html + start, stop - start);
 
     //printf("Action name : %s - ", action->name);
     
@@ -134,7 +134,7 @@ gboolean parse_lesechos_action(Action *action ,char* html){
     if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
     stop = offset - 1;
     
-    char* cours_str = strndup(html + start, stop - start);
+    char* cours_str = g_strndup(html + start, stop - start);
     action->cours = string_to_double(cours_str);
     free(cours_str);
     
@@ -144,7 +144,7 @@ gboolean parse_lesechos_action(Action *action ,char* html){
     if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
     stop = offset-1;
     
-    char* variation_str = strndup(html + start, stop - start);
+    char* variation_str = g_strndup(html + start, stop - start);
     action->variation = string_to_double(variation_str);
     //printf("variation %lf %\n",action->variation);
     free(variation_str);
@@ -159,7 +159,7 @@ gboolean parse_lesechos_action(Action *action ,char* html){
         start = offset;
         if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
         stop = offset-1;
-        char* buff = strndup(html + start, stop - start);
+        char* buff = g_strndup(html + start, stop - start);
         char* striped = lesechos_strip_ordre_quantite_string(buff);
 /*
         printf("striped:%s\n",striped);
@@ -177,7 +177,7 @@ gboolean parse_lesechos_action(Action *action ,char* html){
         start = offset;
         if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
         stop = offset-1;
-        buff = strndup(html + start, stop - start);
+        buff = g_strndup(html + start, stop - start);
         action->achat.prix[i] = string_to_double(buff);
         free(buff);
     }
@@ -191,7 +191,7 @@ gboolean parse_lesechos_action(Action *action ,char* html){
         start = offset;
         if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
         stop = offset-1;
-        char* buff = strndup(html + start, stop - start);
+        char* buff = g_strndup(html + start, stop - start);
         action->vente.prix[i] = string_to_double(buff);
         free(buff);
         
@@ -200,7 +200,7 @@ gboolean parse_lesechos_action(Action *action ,char* html){
         start = offset;
         if ( advance_after(&offset, "</td>", html) == FALSE ) return FALSE;
         stop = offset-1;
-        buff = strndup(html + start, stop - start);
+        buff = g_strndup(html + start, stop - start);
         char* striped = lesechos_strip_ordre_quantite_string(buff);
 /*
         printf("striped:%s\n",striped);

@@ -14,6 +14,7 @@ struct _GtkBoursoramaApp
   GMutex mutex_action_list;
   GtkListStore* list_store_action_list;
   gint64 last_update_time;
+  int total_stardux;
 };
 
 
@@ -38,12 +39,16 @@ gpointer app_logic_thread_func(gpointer data){
     GSList* response_list = NULL;
     
     url_list = parse_boursorame_conf("lesechos.conf");  
+
     http_parallel_get(&response_list,url_list);
+
     
     g_mutex_lock(&(app->mutex_action_list));
     action_list_free(app->action_list);
     app->action_list = NULL;
+
     app->action_list = parse_lesechos_action_multi(response_list);
+    
     g_mutex_unlock(&(app->mutex_action_list));
         
     g_slist_free_full(url_list,g_free);
@@ -82,7 +87,7 @@ gtk_boursorama_app_activate (GApplication *application)
   
   g_thread_new("http thread",app_logic_thread_func,app);
   app->last_update_time = g_get_real_time();
-  g_timeout_add(300,gtk_boursorama_app_label_update,app);
+  g_timeout_add(500,gtk_boursorama_app_label_update,app);
   
 }
 
@@ -148,7 +153,7 @@ gboolean gtk_boursorama_app_update_gui(gpointer data){
     char* row_name;
     
     int count = 0;
-    
+    double total_stardux = 0;
     GtkTreeIter   iter;
     iter_is_valid = gtk_tree_model_get_iter_first(GTK_TREE_MODEL(app->list_store_action_list),&iter);
     while(iter_is_valid){
@@ -167,6 +172,10 @@ gboolean gtk_boursorama_app_update_gui(gpointer data){
                 ACTION_VARIATION,action->variation,
                 ACTION_STARDUX,action->stardux,
                     -1);
+        
+        double stardux = 0;
+        gtk_tree_model_get(GTK_TREE_MODEL(app->list_store_action_list),&iter,ACTION_STARDUX,&stardux,-1);
+        total_stardux += stardux;
         
         iter_is_valid = gtk_tree_model_iter_next(GTK_TREE_MODEL(app->list_store_action_list),&iter);
         count++;
@@ -193,6 +202,9 @@ gboolean gtk_boursorama_app_update_gui(gpointer data){
     }
     first_gui_update = FALSE;
     
+    
+    
+    app->total_stardux = total_stardux;
     app->last_update_time = g_get_real_time();
     
     action_list_free(action_list);
@@ -206,7 +218,8 @@ gboolean gtk_boursorama_app_label_update(gpointer data){
     gint64 now = g_get_real_time();
     float ellapsed = (now - app->last_update_time) / 1000000.0f;
     char format_string[1024];
-    sprintf(format_string,"Derniere mise a jour il y a : %.2f s",ellapsed);
+
+    sprintf(format_string,"Derniere mise a jour il y a : %.2f s -- Total STARDUX : %d",ellapsed, app->total_stardux);
     gtk_label_set_text(GTK_LABEL(app->win->update_label),format_string);
     return TRUE;
     

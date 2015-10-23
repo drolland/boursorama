@@ -96,7 +96,21 @@
       <compileType>
         <cTool>
           <developmentMode>5</developmentMode>
-          <commandLine>`pkg-config --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
+          <incDir>
+            <pElem>../../../../../msys64/mingw64/include</pElem>
+            <pElem>../../../../../msys64/mingw64/include/gtk-3.0</pElem>
+            <pElem>../../../../../msys64/mingw64/include/glib-2.0</pElem>
+            <pElem>../../../../../msys64/mingw64/lib/glib-2.0/include</pElem>
+            <pElem>../../../../../msys64/mingw64/include/pango-1.0</pElem>
+            <pElem>../../../../../msys64/mingw64/include/cairo</pElem>
+            <pElem>../../../../../msys64/mingw64/include/gdk-pixbuf-2.0</pElem>
+            <pElem>../../../../../msys64/mingw64/include/pixman-1</pElem>
+            <pElem>../../../../../msys64/mingw64/include/freetype2</pElem>
+            <pElem>../../../../../msys64/mingw64/include/harfbuzz</pElem>
+            <pElem>../../../../../msys64/mingw64/include/libpng16</pElem>
+            <pElem>../../../../../msys64/mingw64/include/atk-1.0</pElem>
+          </incDir>
+          <commandLine>`pkgconf --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
@@ -108,7 +122,82 @@
           <developmentMode>5</developmentMode>
         </asmTool>
         <linkerTool>
-          <commandLine>-lcurl</commandLine>
+          <linkerAddLib>
+            <pElem>../../../../../msys64/usr/lib</pElem>
+          </linkerAddLib>
+          <commandLine>-lcurl -lgtk-3 -lgdk-3 -lgdi32 -limm32 -lshell32 -lole32 -Wl,-luuid -lwinmm -ldwmapi -lz -lpangowin32-1.0 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -L/mingw64/lib -lglib-2.0 -lintl</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="GtkBoursoramaApp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaApp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaAppWindow.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaAppWindow.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GtkColoredCellRenderer.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkColoredCellRenderer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="action.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="action.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="boursorama.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="download.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="download.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lesechos.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="parser.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="parser.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Mingw64_Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>../../../../../msys64/mingw64/include</pElem>
+            <pElem>../../../../../msys64/mingw64/include/gtk-3.0</pElem>
+            <pElem>../../../../../msys64/mingw64/include/glib-2.0</pElem>
+            <pElem>../../../../../msys64/mingw64/lib/glib-2.0/include</pElem>
+            <pElem>../../../../../msys64/mingw64/include/pango-1.0</pElem>
+            <pElem>../../../../../msys64/mingw64/include/cairo</pElem>
+            <pElem>../../../../../msys64/mingw64/include/gdk-pixbuf-2.0</pElem>
+            <pElem>../../../../../msys64/mingw64/include/pixman-1</pElem>
+            <pElem>../../../../../msys64/mingw64/include/freetype2</pElem>
+            <pElem>../../../../../msys64/mingw64/include/harfbuzz</pElem>
+            <pElem>../../../../../msys64/mingw64/include/libpng16</pElem>
+            <pElem>../../../../../msys64/mingw64/include/atk-1.0</pElem>
+          </incDir>
+          <commandLine>`pkgconf --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>../../../../../msys64/usr/lib</pElem>
+          </linkerAddLib>
+          <commandLine>-lcurl -lgtk-3 -lgdk-3 -lgdi32 -limm32 -lshell32 -lole32 -Wl,-luuid -lwinmm -ldwmapi -lz -lpangowin32-1.0 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -L/mingw64/lib -lglib-2.0 -lintl</commandLine>
         </linkerTool>
       </compileType>
       <item path="GtkBoursoramaApp.c" ex="false" tool="0" flavor2="0">
