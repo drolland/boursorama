@@ -21,8 +21,8 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=MinGW-Windows
-CND_DLIB_EXT=dll
+CND_PLATFORM=GNU-Linux-x86
+CND_DLIB_EXT=so
 CND_CONF=Release
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -45,7 +45,7 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=`pkgconf --cflags --libs glib-2.0 gtk+-3.0`  
+CFLAGS=`pkg-config --cflags --libs glib-2.0 gtk+-3.0`  
 
 # CC Compiler Flags
 CCFLAGS=
@@ -62,46 +62,46 @@ LDLIBSOPTIONS=-L../../../../../msys64/usr/lib
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama.exe
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama.exe: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama ${OBJECTFILES} ${LDLIBSOPTIONS} -lcurl -lgtk-3 -lgdk-3 -lgdi32 -limm32 -lshell32 -lole32 -Wl,-luuid -lwinmm -ldwmapi -lz -lpangowin32-1.0 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -L/mingw64/lib -lglib-2.0 -lintl
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama ${OBJECTFILES} ${LDLIBSOPTIONS} -lcurl `pkg-config --cflags --libs glib-2.0 gtk+-3.0` 
 
 ${OBJECTDIR}/GtkBoursoramaApp.o: GtkBoursoramaApp.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I../../../../../msys64/mingw64/include -I../../../../../msys64/mingw64/include/gtk-3.0 -I../../../../../msys64/mingw64/include/glib-2.0 -I../../../../../msys64/mingw64/lib/glib-2.0/include -I../../../../../msys64/mingw64/include/pango-1.0 -I../../../../../msys64/mingw64/include/cairo -I../../../../../msys64/mingw64/include/gdk-pixbuf-2.0 -I../../../../../msys64/mingw64/include/pixman-1 -I../../../../../msys64/mingw64/include/freetype2 -I../../../../../msys64/mingw64/include/harfbuzz -I../../../../../msys64/mingw64/include/libpng16 -I../../../../../msys64/mingw64/include/atk-1.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkBoursoramaApp.o GtkBoursoramaApp.c
+	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkBoursoramaApp.o GtkBoursoramaApp.c
 
 ${OBJECTDIR}/GtkBoursoramaAppWindow.o: GtkBoursoramaAppWindow.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I../../../../../msys64/mingw64/include -I../../../../../msys64/mingw64/include/gtk-3.0 -I../../../../../msys64/mingw64/include/glib-2.0 -I../../../../../msys64/mingw64/lib/glib-2.0/include -I../../../../../msys64/mingw64/include/pango-1.0 -I../../../../../msys64/mingw64/include/cairo -I../../../../../msys64/mingw64/include/gdk-pixbuf-2.0 -I../../../../../msys64/mingw64/include/pixman-1 -I../../../../../msys64/mingw64/include/freetype2 -I../../../../../msys64/mingw64/include/harfbuzz -I../../../../../msys64/mingw64/include/libpng16 -I../../../../../msys64/mingw64/include/atk-1.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkBoursoramaAppWindow.o GtkBoursoramaAppWindow.c
+	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkBoursoramaAppWindow.o GtkBoursoramaAppWindow.c
 
 ${OBJECTDIR}/GtkColoredCellRenderer.o: GtkColoredCellRenderer.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I../../../../../msys64/mingw64/include -I../../../../../msys64/mingw64/include/gtk-3.0 -I../../../../../msys64/mingw64/include/glib-2.0 -I../../../../../msys64/mingw64/lib/glib-2.0/include -I../../../../../msys64/mingw64/include/pango-1.0 -I../../../../../msys64/mingw64/include/cairo -I../../../../../msys64/mingw64/include/gdk-pixbuf-2.0 -I../../../../../msys64/mingw64/include/pixman-1 -I../../../../../msys64/mingw64/include/freetype2 -I../../../../../msys64/mingw64/include/harfbuzz -I../../../../../msys64/mingw64/include/libpng16 -I../../../../../msys64/mingw64/include/atk-1.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkColoredCellRenderer.o GtkColoredCellRenderer.c
+	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkColoredCellRenderer.o GtkColoredCellRenderer.c
 
 ${OBJECTDIR}/action.o: action.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I../../../../../msys64/mingw64/include -I../../../../../msys64/mingw64/include/gtk-3.0 -I../../../../../msys64/mingw64/include/glib-2.0 -I../../../../../msys64/mingw64/lib/glib-2.0/include -I../../../../../msys64/mingw64/include/pango-1.0 -I../../../../../msys64/mingw64/include/cairo -I../../../../../msys64/mingw64/include/gdk-pixbuf-2.0 -I../../../../../msys64/mingw64/include/pixman-1 -I../../../../../msys64/mingw64/include/freetype2 -I../../../../../msys64/mingw64/include/harfbuzz -I../../../../../msys64/mingw64/include/libpng16 -I../../../../../msys64/mingw64/include/atk-1.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/action.o action.c
+	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/action.o action.c
 
 ${OBJECTDIR}/download.o: download.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I../../../../../msys64/mingw64/include -I../../../../../msys64/mingw64/include/gtk-3.0 -I../../../../../msys64/mingw64/include/glib-2.0 -I../../../../../msys64/mingw64/lib/glib-2.0/include -I../../../../../msys64/mingw64/include/pango-1.0 -I../../../../../msys64/mingw64/include/cairo -I../../../../../msys64/mingw64/include/gdk-pixbuf-2.0 -I../../../../../msys64/mingw64/include/pixman-1 -I../../../../../msys64/mingw64/include/freetype2 -I../../../../../msys64/mingw64/include/harfbuzz -I../../../../../msys64/mingw64/include/libpng16 -I../../../../../msys64/mingw64/include/atk-1.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/download.o download.c
+	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/download.o download.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I../../../../../msys64/mingw64/include -I../../../../../msys64/mingw64/include/gtk-3.0 -I../../../../../msys64/mingw64/include/glib-2.0 -I../../../../../msys64/mingw64/lib/glib-2.0/include -I../../../../../msys64/mingw64/include/pango-1.0 -I../../../../../msys64/mingw64/include/cairo -I../../../../../msys64/mingw64/include/gdk-pixbuf-2.0 -I../../../../../msys64/mingw64/include/pixman-1 -I../../../../../msys64/mingw64/include/freetype2 -I../../../../../msys64/mingw64/include/harfbuzz -I../../../../../msys64/mingw64/include/libpng16 -I../../../../../msys64/mingw64/include/atk-1.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
+	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
 
 ${OBJECTDIR}/parser.o: parser.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I../../../../../msys64/mingw64/include -I../../../../../msys64/mingw64/include/gtk-3.0 -I../../../../../msys64/mingw64/include/glib-2.0 -I../../../../../msys64/mingw64/lib/glib-2.0/include -I../../../../../msys64/mingw64/include/pango-1.0 -I../../../../../msys64/mingw64/include/cairo -I../../../../../msys64/mingw64/include/gdk-pixbuf-2.0 -I../../../../../msys64/mingw64/include/pixman-1 -I../../../../../msys64/mingw64/include/freetype2 -I../../../../../msys64/mingw64/include/harfbuzz -I../../../../../msys64/mingw64/include/libpng16 -I../../../../../msys64/mingw64/include/atk-1.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/parser.o parser.c
+	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/parser.o parser.c
 
 # Subprojects
 .build-subprojects:
@@ -109,7 +109,7 @@ ${OBJECTDIR}/parser.o: parser.c
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama.exe
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama
 
 # Subprojects
 .clean-subprojects:

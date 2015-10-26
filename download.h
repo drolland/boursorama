@@ -2,7 +2,7 @@
 #include <glib-2.0/glib.h>
 
 typedef struct s_response_buffer {
-    char buffer[1000000];
+    char buffer[2000000];
     int offset;
 } ResponseBuffer;
 

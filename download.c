@@ -78,7 +78,7 @@ int http_parallel_get(GSList** response_list, GSList* url_list) {
     }
 
     while(nb_task_completed < nb_urls)
-        g_usleep(200 * 1000); // 100 ms
+        g_usleep(200 * 1000); // 200 ms
                 
     for (int i = 0; i < nb_urls; i++)
         curl_easy_cleanup(curl_handle[i]);

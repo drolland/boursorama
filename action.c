@@ -43,6 +43,7 @@ void action_print(Action* action){
         printf("Q = %d  -  Prix %f\n",action->vente.quantite[i],action->vente.prix[i]);
     }
     printf("STARDUX %f \n",action->stardux);
+    printf("Time : %ld\n",action->time);
 }
 
 gpointer action_copy(gconstpointer action,gpointer for_signature){

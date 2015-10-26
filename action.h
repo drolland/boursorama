@@ -13,6 +13,7 @@ typedef struct _action {
     CarnetOrdre achat;
     CarnetOrdre vente;
     double stardux;
+    gint64 time;
 } Action ;
 
 Action* action_new();

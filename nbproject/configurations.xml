@@ -53,7 +53,7 @@
           <commandLine>`pkg-config --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
         </cTool>
         <linkerTool>
-          <commandLine>-lcurl</commandLine>
+          <commandLine>-lcurl `pkg-config --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
         </linkerTool>
       </compileType>
       <item path="GtkBoursoramaApp.c" ex="false" tool="0" flavor2="0">
@@ -97,20 +97,11 @@
         <cTool>
           <developmentMode>5</developmentMode>
           <incDir>
-            <pElem>../../../../../msys64/mingw64/include</pElem>
-            <pElem>../../../../../msys64/mingw64/include/gtk-3.0</pElem>
-            <pElem>../../../../../msys64/mingw64/include/glib-2.0</pElem>
-            <pElem>../../../../../msys64/mingw64/lib/glib-2.0/include</pElem>
-            <pElem>../../../../../msys64/mingw64/include/pango-1.0</pElem>
-            <pElem>../../../../../msys64/mingw64/include/cairo</pElem>
-            <pElem>../../../../../msys64/mingw64/include/gdk-pixbuf-2.0</pElem>
-            <pElem>../../../../../msys64/mingw64/include/pixman-1</pElem>
-            <pElem>../../../../../msys64/mingw64/include/freetype2</pElem>
-            <pElem>../../../../../msys64/mingw64/include/harfbuzz</pElem>
-            <pElem>../../../../../msys64/mingw64/include/libpng16</pElem>
-            <pElem>../../../../../msys64/mingw64/include/atk-1.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/gtk-3.0</pElem>
           </incDir>
-          <commandLine>`pkgconf --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
+          <commandLine>`pkg-config --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
+          <useLinkerLibraries>false</useLinkerLibraries>
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
@@ -125,7 +116,7 @@
           <linkerAddLib>
             <pElem>../../../../../msys64/usr/lib</pElem>
           </linkerAddLib>
-          <commandLine>-lcurl -lgtk-3 -lgdk-3 -lgdi32 -limm32 -lshell32 -lole32 -Wl,-luuid -lwinmm -ldwmapi -lz -lpangowin32-1.0 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -L/mingw64/lib -lglib-2.0 -lintl</commandLine>
+          <commandLine>-lcurl `pkg-config --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
         </linkerTool>
       </compileType>
       <item path="GtkBoursoramaApp.c" ex="false" tool="0" flavor2="0">

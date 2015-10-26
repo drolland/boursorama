@@ -27,7 +27,8 @@ gboolean advance_after(int* offset, char* string, char* html) {
 
 
 double string_to_double(char* str){
-    for(int i = 0; i< strlen(str);i++)
+    int len = strlen(str);
+    for(int i = 0; i< len;i++)
         if ( str[i] == '.') str[i] =',';
     return atof(str);
 }
@@ -43,7 +44,7 @@ char* lesechos_strip_ordre_quantite_string(char* str){
         }
         iter++;
     }
-    ret = '\0';
+    *ret = '\0';
     return buff;
 }
 
@@ -223,7 +224,8 @@ gboolean parse_lesechos_action(Action *action ,char* html){
     }
     
     action->stardux = stardux;
-    action_print(action);
+    action->time = g_get_real_time();
+    //action_print(action);
     
     return TRUE;
 }
@@ -289,6 +291,9 @@ GSList* parse_boursorame_conf(char* file) {
         g_free(buffer);
         g_strfreev(splited);
     }
+    
+    g_io_channel_shutdown(channel,TRUE,NULL);
+    g_io_channel_unref(channel);
 
     return url_list;
 }

@@ -60,7 +60,7 @@ gboolean no_row_selection_func(GtkTreeSelection *selection,GtkTreeModel *model,G
     gtk_tree_model_get(model,&iter,ACTION_NAME,&str,-1);
     printf("Row %s selected\n",str);
     g_free(str);
-    return FALSE;
+    return FALSE; // False forbid row selection
 }
 
 static void gtk_boursorama_app_window_init(GtkBoursoramaAppWindow *app){
@@ -147,7 +147,7 @@ static void
 gtk_boursorama_app_window_class_init (GtkBoursoramaAppWindowClass *class)
 {
     GObjectClass* object_class = (GObjectClass*) class;
-    object_class->finalize = gtk_boursorama_app_window_finalize;
+    //object_class->finalize = gtk_boursorama_app_window_finalize;
 }
 
 
@@ -159,11 +159,7 @@ GtkBoursoramaAppWindow * gtk_boursorama_app_window_new (GtkBoursoramaApp *app)
   return g_object_new (GTK_BOURSORAMA_TYPE_APP_WINDOW, "application", app, NULL);
 }
 
-void
-gtk_boursorama_app_window_open (GtkBoursoramaAppWindow *win,
-                         GFile            *file)
-{
-}
+
 
 
     
