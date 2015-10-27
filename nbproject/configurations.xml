@@ -4,10 +4,12 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Action.h</itemPath>
+      <itemPath>ActionDatabase.h</itemPath>
+      <itemPath>GtkBoursoramaActionWindow.h</itemPath>
       <itemPath>GtkBoursoramaApp.h</itemPath>
       <itemPath>GtkBoursoramaAppWindow.h</itemPath>
       <itemPath>GtkColoredCellRenderer.h</itemPath>
-      <itemPath>action.h</itemPath>
       <itemPath>download.h</itemPath>
       <itemPath>parser.h</itemPath>
     </logicalFolder>
@@ -20,10 +22,12 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Action.c</itemPath>
+      <itemPath>ActionDatabase.c</itemPath>
+      <itemPath>GtkBoursoramaActionWindow.c</itemPath>
       <itemPath>GtkBoursoramaApp.c</itemPath>
       <itemPath>GtkBoursoramaAppWindow.c</itemPath>
       <itemPath>GtkColoredCellRenderer.c</itemPath>
-      <itemPath>action.c</itemPath>
       <itemPath>download.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>parser.c</itemPath>
@@ -56,6 +60,18 @@
           <commandLine>-lcurl `pkg-config --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
         </linkerTool>
       </compileType>
+      <item path="Action.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Action.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ActionDatabase.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ActionDatabase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaActionWindow.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaActionWindow.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="GtkBoursoramaApp.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="GtkBoursoramaApp.h" ex="false" tool="3" flavor2="0">
@@ -67,10 +83,6 @@
       <item path="GtkColoredCellRenderer.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="GtkColoredCellRenderer.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="action.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="action.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="boursorama.conf" ex="false" tool="3" flavor2="0">
       </item>
@@ -119,6 +131,18 @@
           <commandLine>-lcurl `pkg-config --cflags --libs glib-2.0 gtk+-3.0` </commandLine>
         </linkerTool>
       </compileType>
+      <item path="Action.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Action.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ActionDatabase.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ActionDatabase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaActionWindow.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaActionWindow.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="GtkBoursoramaApp.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="GtkBoursoramaApp.h" ex="false" tool="3" flavor2="0">
@@ -130,10 +154,6 @@
       <item path="GtkColoredCellRenderer.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="GtkColoredCellRenderer.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="action.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="action.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="boursorama.conf" ex="false" tool="3" flavor2="0">
       </item>
@@ -191,6 +211,18 @@
           <commandLine>-lcurl -lgtk-3 -lgdk-3 -lgdi32 -limm32 -lshell32 -lole32 -Wl,-luuid -lwinmm -ldwmapi -lz -lpangowin32-1.0 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -L/mingw64/lib -lglib-2.0 -lintl</commandLine>
         </linkerTool>
       </compileType>
+      <item path="Action.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Action.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ActionDatabase.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ActionDatabase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaActionWindow.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="GtkBoursoramaActionWindow.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="GtkBoursoramaApp.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="GtkBoursoramaApp.h" ex="false" tool="3" flavor2="0">
@@ -202,10 +234,6 @@
       <item path="GtkColoredCellRenderer.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="GtkColoredCellRenderer.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="action.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="action.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="boursorama.conf" ex="false" tool="3" flavor2="0">
       </item>

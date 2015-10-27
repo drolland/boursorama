@@ -35,10 +35,12 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Action.o \
+	${OBJECTDIR}/ActionDatabase.o \
+	${OBJECTDIR}/GtkBoursoramaActionWindow.o \
 	${OBJECTDIR}/GtkBoursoramaApp.o \
 	${OBJECTDIR}/GtkBoursoramaAppWindow.o \
 	${OBJECTDIR}/GtkColoredCellRenderer.o \
-	${OBJECTDIR}/action.o \
 	${OBJECTDIR}/download.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/parser.o
@@ -68,6 +70,21 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/boursorama ${OBJECTFILES} ${LDLIBSOPTIONS} -lcurl `pkg-config --cflags --libs glib-2.0 gtk+-3.0` 
 
+${OBJECTDIR}/Action.o: Action.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Action.o Action.c
+
+${OBJECTDIR}/ActionDatabase.o: ActionDatabase.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ActionDatabase.o ActionDatabase.c
+
+${OBJECTDIR}/GtkBoursoramaActionWindow.o: GtkBoursoramaActionWindow.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkBoursoramaActionWindow.o GtkBoursoramaActionWindow.c
+
 ${OBJECTDIR}/GtkBoursoramaApp.o: GtkBoursoramaApp.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -82,11 +99,6 @@ ${OBJECTDIR}/GtkColoredCellRenderer.o: GtkColoredCellRenderer.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GtkColoredCellRenderer.o GtkColoredCellRenderer.c
-
-${OBJECTDIR}/action.o: action.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I/usr/include/glib-2.0 -I/usr/include/gtk-3.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/action.o action.c
 
 ${OBJECTDIR}/download.o: download.c 
 	${MKDIR} -p ${OBJECTDIR}

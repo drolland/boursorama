@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "action.h"
+#include "Action.h"
 #include "download.h"
 #include <assert.h>
 #include <glib-2.0/glib/gerror.h>

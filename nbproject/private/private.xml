@@ -7,16 +7,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/drolland/NetBeansProjects/boursorama/download.h</file>
             <file>file:/home/drolland/NetBeansProjects/boursorama/action.c</file>
+            <file>file:/home/drolland/NetBeansProjects/boursorama/parser.c</file>
+            <file>file:/home/drolland/NetBeansProjects/boursorama/GtkBoursoramaActionWindow.h</file>
+            <file>file:/home/drolland/NetBeansProjects/boursorama/GtkColoredCellRenderer.h</file>
+            <file>file:/home/drolland/NetBeansProjects/boursorama/download.c</file>
+            <file>file:/home/drolland/NetBeansProjects/boursorama/GtkBoursoramaActionWindow.c</file>
+            <file>file:/home/drolland/NetBeansProjects/boursorama/download.h</file>
             <file>file:/home/drolland/NetBeansProjects/boursorama/GtkBoursoramaApp.c</file>
+            <file>file:/home/drolland/NetBeansProjects/boursorama/GtkBoursoramaAppWindow.h</file>
             <file>file:/home/drolland/NetBeansProjects/boursorama/GtkColoredCellRenderer.c</file>
             <file>file:/home/drolland/NetBeansProjects/boursorama/main.c</file>
             <file>file:/home/drolland/NetBeansProjects/boursorama/GtkBoursoramaAppWindow.c</file>
-            <file>file:/home/drolland/NetBeansProjects/boursorama/parser.c</file>
+            <file>file:/home/drolland/NetBeansProjects/boursorama/GtkBoursoramaApp.h</file>
             <file>file:/home/drolland/NetBeansProjects/boursorama/action.h</file>
-            <file>file:/home/drolland/NetBeansProjects/boursorama/GtkColoredCellRenderer.h</file>
-            <file>file:/home/drolland/NetBeansProjects/boursorama/download.c</file>
         </group>
     </open-files>
 </project-private>

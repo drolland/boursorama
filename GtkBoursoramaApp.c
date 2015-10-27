@@ -1,9 +1,12 @@
 #include <gtk/gtk.h>
+#include <gtk-3.0/gtk/gtkwindow.h>
 #include "parser.h"
 #include "download.h"
 
 #include "GtkBoursoramaApp.h"
 #include "GtkBoursoramaAppWindow.h"
+#include "GtkBoursoramaActionWindow.h"
+#include "ActionDatabase.h"
 
 struct _GtkBoursoramaApp {
     GtkApplication parent;
@@ -40,11 +43,11 @@ gpointer app_logic_thread_func(gpointer data) {
 
 
         g_mutex_lock(&(app->mutex_action_list));
-        action_list_free(app->action_list);
-        app->action_list = NULL;
-
+    
         app->action_list = parse_lesechos_action_multi(response_list);
-
+        ActionDatabase* database = action_database_get();
+        action_database_insert_many(database,app->action_list);
+        
         g_mutex_unlock(&(app->mutex_action_list));
 
         g_slist_free_full(url_list, g_free);
@@ -83,32 +86,15 @@ gtk_boursorama_app_activate(GApplication *application) {
     app->last_update_time = g_get_real_time();
     g_timeout_add(500, gtk_boursorama_app_label_update, app);
 
+
 }
 
-static void
-gtk_boursorama_app_open(GApplication *app,
-        GFile **files,
-        gint n_files,
-        const gchar *hint) {
-    GList *windows;
-    GtkBoursoramaAppWindow *win = ((GtkBoursoramaApp*) app)->win;
-    int i;
 
-    windows = gtk_application_get_windows(GTK_APPLICATION(app));
-    if (windows)
-        win = GTK_BOURSORAMA_APP_WINDOW(windows->data);
-    else
-        win = gtk_boursorama_app_window_new(GTK_BOURSORAMA_APP(app));
-
-
-
-    gtk_window_present(GTK_WINDOW(win));
-}
 
 static void
 gtk_boursorama_app_class_init(GtkBoursoramaAppClass *class) {
     G_APPLICATION_CLASS(class)->activate = gtk_boursorama_app_activate;
-    G_APPLICATION_CLASS(class)->open = gtk_boursorama_app_open;
+
 }
 
 GtkBoursoramaApp *

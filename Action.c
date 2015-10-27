@@ -1,4 +1,4 @@
-#include "action.h"
+#include "Action.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -33,6 +33,8 @@ void action_list_free(GSList* actions_list){
 
 void action_print(Action* action){
     printf("Action : %s\n", action->name);
+
+
     printf("Cours %f  |  Variation %f\n",action->cours,action->variation);
     printf("Carnet d'ordre achat \n");
     for(int i = 0; i < 5;i++){
@@ -43,7 +45,9 @@ void action_print(Action* action){
         printf("Q = %d  -  Prix %f\n",action->vente.quantite[i],action->vente.prix[i]);
     }
     printf("STARDUX %f \n",action->stardux);
+
     printf("Time : %ld\n",action->time);
+
 }
 
 gpointer action_copy(gconstpointer action,gpointer for_signature){
@@ -51,6 +55,14 @@ gpointer action_copy(gconstpointer action,gpointer for_signature){
     memcpy(copy ,action ,sizeof(Action));
     copy->name = strdup(((Action*)action)->name);
     return copy;    
+}
+
+void action_list_print(GSList* action_list){
+    GSList* iter = action_list;
+    while(iter!=NULL){
+        action_print(iter->data);
+        iter = g_slist_next(iter);
+    }
 }
 
 GSList* action_list_copy(GSList* action_list){
